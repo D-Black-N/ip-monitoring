@@ -47,12 +47,14 @@
   * event_type - тип события
   * created_at - дата создания
   * ip_id - FK на IP-адрес
+  * created_at - время создания
 
 * **Проверка (Checks):**
   * rtt - время отклика
   * failed - удачная/неудачная проверка
   * loss - процент потеряных ICMP
   * ip_id - FK на IP-адрес
+  * created_at - время создания
 
 * **Статистика (Stats):**
   * average_rtt - среднее RTT
@@ -62,3 +64,14 @@
   * rms_rtt - среднеквадратичное отклонение замеров RTT
   * loss - процент потерянных пакетов ICMP
   * ip_id - FK на IP-адрес
+  * created_at - время создания
+  * time_from - время (от)
+  * time_to - время (до)
+
+### Реализация API
+Подготовить обработчики для запросов по API для следующих методов:
+* POST /ips - добавить адрес с параметрами (enabled: bool, ip: ipv4/ipv6 address)
+* POST /ips/:id/enable - включить сбор статистики ip
+* POST /ips/:id/disable - выключить сбор статистики ip
+* GET /ips/:id/stats - получить статистику для адреса (time_from: datetime, time_to: datetime)
+* DELETE /ips/:id - выключить сбор и удалить адрес
