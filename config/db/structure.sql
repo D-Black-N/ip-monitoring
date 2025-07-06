@@ -157,6 +157,14 @@ ALTER TABLE ONLY public.events
 
 
 --
+-- Name: ips ips_address_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.ips
+    ADD CONSTRAINT ips_address_key UNIQUE (address);
+
+
+--
 -- Name: ips ips_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -214,4 +222,5 @@ INSERT INTO schema_migrations (filename) VALUES
 ('20250706145328_create_ips.rb'),
 ('20250706151946_create_events.rb'),
 ('20250706153201_create_checks.rb'),
-('20250706153607_create_stats.rb');
+('20250706153607_create_stats.rb'),
+('20250706154235_add_uniq_constraint_to_ips.rb');
