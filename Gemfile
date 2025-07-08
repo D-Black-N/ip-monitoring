@@ -7,13 +7,18 @@ gem "hanami-controller", "~> 2.2"
 gem "hanami-db", "~> 2.2"
 gem "hanami-router", "~> 2.2"
 gem "hanami-validations", "~> 2.2"
-gem "hanami-view", "~> 2.2"
 
 gem "dry-types", "~> 1.7"
 gem "dry-operation"
 gem "puma"
 gem "rake"
 gem "pg"
+
+# Fast serialization
+gem "oj"
+
+# Translations
+gem 'hanami-i18n'
 
 group :development do
   gem "hanami-webconsole", "~> 2.2"
@@ -34,8 +39,4 @@ end
 group :test do
   # Database
   gem "database_cleaner-sequel"
-
-  # Web integration
-  gem "capybara"
-  gem "rack-test"
 end
