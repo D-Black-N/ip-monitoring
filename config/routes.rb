@@ -2,7 +2,7 @@
 
 module IpMonitoring
   class Routes < Hanami::Routes
-    root { 'Base URL' }
+    root to: 'home'
 
     scope 'api/v1' do
       # get    '/ips/:id/stats', to: 'ips.stats'

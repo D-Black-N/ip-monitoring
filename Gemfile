@@ -39,4 +39,5 @@ end
 group :test do
   # Database
   gem "database_cleaner-sequel"
+  gem 'rack-test'
 end
