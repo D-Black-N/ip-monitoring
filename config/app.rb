@@ -4,6 +4,6 @@ require "hanami"
 
 module IpMonitoring
   class App < Hanami::App
-    require_relative 'locale'
+    config.middleware.use :body_parser, :json
   end
 end

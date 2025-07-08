@@ -2,13 +2,14 @@
 
 module IpMonitoring
   class Routes < Hanami::Routes
+    root { 'Base URL' }
+
     scope 'api/v1' do
-      get    '/ips', to: 'ips.index'
-      get    '/ips/stats', to: 'ips.stats'
+      # get    '/ips/:id/stats', to: 'ips.stats'
       post   '/ips', to: 'ips.create'
-      post   'ips/:id/enable', to: 'ips.enable'
-      post   'ips/:id/disable', to: 'ips.disable'
-      delete '/ips/:id', to: 'ips.destroy'
+      # post   'ips/:id/enable', to: 'ips.enable'
+      # post   'ips/:id/disable', to: 'ips.disable'
+      # delete '/ips/:id', to: 'ips.destroy'
     end
   end
 end
