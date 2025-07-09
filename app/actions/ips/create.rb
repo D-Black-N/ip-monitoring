@@ -14,8 +14,6 @@ module IpMonitoring
         end
 
         def handle(request, response)
-          unprocessable_entity(request)
-
           case operation.call(request.params[:ip])
           in Success(ip)
             response.body = { ip: ip.attributes }.to_json

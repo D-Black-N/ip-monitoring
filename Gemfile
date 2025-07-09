@@ -26,6 +26,8 @@ end
 
 group :development, :test do
   gem "dotenv"
+  gem 'byebug'
+  gem 'rom-factory'
 end
 
 group :cli, :development do

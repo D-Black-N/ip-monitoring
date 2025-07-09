@@ -13,15 +13,11 @@ module IpMonitoring
           end
 
           rule(:address) do
-            begin
-              IPAddr.new(value)
-            rescue IPAddr::InvalidAddressError, ArgumentError
-              key.failure('invalid format')
-            end
-          end
+            IPAddr.new(value)
 
-          rule(:address) do
             key.failure('already exists') if repo.address_exist?(value)
+          rescue IPAddr::InvalidAddressError, ArgumentError
+            key.failure('invalid format')
           end
         end
       end
