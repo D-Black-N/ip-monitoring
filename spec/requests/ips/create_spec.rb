@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require 'byebug'
 
 RSpec.describe 'POST /api/v1/ips', :db, type: :request do
   before do
@@ -40,7 +39,7 @@ RSpec.describe 'POST /api/v1/ips', :db, type: :request do
   context 'with 400 Bad Request' do
     let(:params) { { ip: { address: 'bad address' } } }
 
-    it 'failure and return 400' do
+    it 'failure and return 400', :aggregate_failures do
       expect(last_response.status).to eq(400)
       expect(response[:errors]).to include(address: ['invalid format'])
     end
@@ -49,7 +48,7 @@ RSpec.describe 'POST /api/v1/ips', :db, type: :request do
   context 'with 422 Unprocessable Entity' do
     let(:params) { {} }
 
-    it 'failure and return 422' do
+    it 'failure and return 422', :aggregate_failures do
       expect(last_response.status).to eq(422)
       expect(response[:errors]).to include(ip: ['is missing'])
     end

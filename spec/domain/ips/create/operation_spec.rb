@@ -14,11 +14,13 @@ RSpec.describe IpMonitoring::Domain::Ips::Create::Operation, '#call' do
   end
 
   context 'with failure' do
+    let(:failure) { operation.failure.first }
+
     context 'with invalid params' do
       let(:params) { {} }
 
       it 'failure with bad_request' do
-        expect(operation.failure.first).to eq(:bad_request)
+        expect(failure).to eq(:bad_request)
       end
     end
 
@@ -28,7 +30,7 @@ RSpec.describe IpMonitoring::Domain::Ips::Create::Operation, '#call' do
       before { allow(repo).to receive(:create).and_raise(StandardError) }
 
       it 'failure with internal_server_error' do
-        expect(operation.failure.first).to eq(:internal_server_error)
+        expect(failure).to eq(:internal_server_error)
       end
     end
   end

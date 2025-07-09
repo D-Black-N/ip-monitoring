@@ -7,7 +7,7 @@ module IpMonitoring
     scope 'api/v1' do
       # get    '/ips/:id/stats', to: 'ips.stats'
       post   '/ips', to: 'ips.create'
-      # post   'ips/:id/enable', to: 'ips.enable'
+      post   'ips/:id/:state', to: 'ips.set_state'
       # post   'ips/:id/disable', to: 'ips.disable'
       # delete '/ips/:id', to: 'ips.destroy'
     end
