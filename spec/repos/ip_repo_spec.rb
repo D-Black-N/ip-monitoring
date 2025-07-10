@@ -3,6 +3,54 @@
 RSpec.describe IpMonitoring::Repos::IpRepo, :db do
   subject(:repo) { described_class.new }
 
+  describe '#avaliable' do
+    let(:result) { repo.avaliable }
+
+    it 'return blank' do
+      expect(result).not_to be_exist
+    end
+
+    context 'when IP not deleted' do
+      before { Factory[:ip] }
+
+      it 'return scope' do
+        expect(result).to be_exist
+      end
+    end
+
+    context 'when IP deleted' do
+      before { Factory[:ip, deleted: true] }
+
+      it 'return blank' do
+        expect(result).not_to be_exist
+      end
+    end
+  end
+
+  describe '#deleted' do
+    let(:result) { repo.deleted }
+
+    it 'return blank' do
+      expect(result).not_to be_exist
+    end
+
+    context 'when IP not deleted' do
+      before { Factory[:ip] }
+
+      it 'return blank' do
+        expect(result).not_to be_exist
+      end
+    end
+
+    context 'when IP deleted' do
+      before { Factory[:ip, deleted: true] }
+
+      it 'return scope' do
+        expect(result).to be_exist
+      end
+    end
+  end
+
   describe '#exist?' do
     let(:result) { repo.exist?(id) }
     let(:id) { 1 }
@@ -19,6 +67,15 @@ RSpec.describe IpMonitoring::Repos::IpRepo, :db do
         expect(result).to be_truthy
       end
     end
+
+    context 'when address deleted' do
+      let(:ip) { Factory[:ip, deleted: true] }
+      let(:id) { ip.id }
+
+      it 'return false' do
+        expect(result).to be_falsey
+      end
+    end
   end
 
   describe '#address_exist?' do
@@ -33,6 +90,50 @@ RSpec.describe IpMonitoring::Repos::IpRepo, :db do
 
       it 'return true' do
         expect(result).to be_truthy
+      end
+    end
+
+    context 'when address deleted' do
+      before { Factory[:ip, deleted: true] }
+
+      it 'return false' do
+        expect(result).to be_falsey
+      end
+    end
+  end
+
+  describe '#activate_deleted' do
+    let(:result) { repo.activate_deleted(address, enabled) }
+    let(:address) { '8.8.8.8' }
+    let(:enabled) { true }
+
+    it 'return false' do
+      expect(result).to be_falsey
+    end
+
+    context 'when IP not deleted' do
+      before { Factory[:ip, address: address] }
+
+      it 'return false' do
+        expect(result).to be_falsey
+      end
+    end
+
+    context 'when IP deleted' do
+      before { Factory[:ip, address: address, deleted: true, enabled: false] }
+
+      it 'activate IP and return record', :aggregate_failures do
+        expect(result).to be_a IpMonitoring::Structs::Ip
+        expect(result.attributes).to include(deleted: false, enabled: true)
+      end
+
+      context 'when enabled not changed' do
+        let(:enabled) { false }
+
+      it 'activate IP and return record', :aggregate_failures do
+        expect(result).to be_a IpMonitoring::Structs::Ip
+        expect(result.attributes).to include(deleted: false, enabled: false)
+      end
       end
     end
   end
@@ -63,6 +164,24 @@ RSpec.describe IpMonitoring::Repos::IpRepo, :db do
         it 'update and return record' do
           expect(result.enabled).to be_falsey
         end
+      end
+    end
+  end
+
+  describe '#soft_delete' do
+    let(:result) { repo.soft_delete(id) }
+    let(:id) { 1 }
+
+    it 'update nothing' do
+      expect(result).to eq(0)
+    end
+
+    context 'with record' do
+      let(:ip) { Factory[:ip] }
+      let(:id) { ip.id }
+
+      it 'update record' do
+        expect(result).to eq(1)
       end
     end
   end

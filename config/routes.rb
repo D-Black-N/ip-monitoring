@@ -8,8 +8,7 @@ module IpMonitoring
       # get    '/ips/:id/stats', to: 'ips.stats'
       post   '/ips', to: 'ips.create'
       post   'ips/:id/:state', to: 'ips.set_state'
-      # post   'ips/:id/disable', to: 'ips.disable'
-      # delete '/ips/:id', to: 'ips.destroy'
+      delete '/ips/:id', to: 'ips.delete'
     end
   end
 end
