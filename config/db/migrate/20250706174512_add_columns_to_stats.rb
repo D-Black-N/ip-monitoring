@@ -2,8 +2,7 @@
 
 ROM::SQL.migration do
   change do
-    alter_table :events do
-      add_column :created_at, DateTime, default: Sequel.lit('NOW()'), null: false
+    alter_table :stats do
       add_column :time_from, DateTime
       add_column :time_to, DateTime
     end

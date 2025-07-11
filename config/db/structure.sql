@@ -26,10 +26,10 @@ SET default_table_access_method = heap;
 
 CREATE TABLE public.checks (
     id integer NOT NULL,
-    rtt_ms integer NOT NULL,
+    rtt_ms integer,
     failed boolean DEFAULT false,
-    loss double precision DEFAULT 0.0 NOT NULL,
-    ip_id integer NOT NULL
+    ip_id integer NOT NULL,
+    created_at timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -122,7 +122,10 @@ CREATE TABLE public.stats (
     median_rtt_ms integer,
     rms_rtt_ms integer,
     loss double precision,
-    ip_id integer NOT NULL
+    ip_id integer NOT NULL,
+    time_from timestamp without time zone,
+    time_to timestamp without time zone,
+    created_at timestamp without time zone DEFAULT now() NOT NULL
 );
 
 
@@ -223,4 +226,8 @@ INSERT INTO schema_migrations (filename) VALUES
 ('20250706151946_create_events.rb'),
 ('20250706153201_create_checks.rb'),
 ('20250706153607_create_stats.rb'),
-('20250706154235_add_uniq_constraint_to_ips.rb');
+('20250706154235_add_uniq_constraint_to_ips.rb'),
+('20250706174456_add_created_at_to_checks.rb'),
+('20250706174512_add_columns_to_stats.rb'),
+('20250710201822_change_checks.rb'),
+('20250711135409_add_created_at_to_stats.rb');

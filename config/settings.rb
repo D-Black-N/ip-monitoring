@@ -2,8 +2,8 @@
 
 module IpMonitoring
   class Settings < Hanami::Settings
-    # Define your app settings here, for example:
-    #
-    # setting :my_flag, default: false, constructor: Types::Params::Bool
+    setting :icmp_timeout, default: 1, constructor: Types::Params::Integer
+    setting :thread_pool_size, default: 5, constructor: Types::Params::Integer
+    setting :check_timeout, default: 60, constructor: Types::Params::Integer
   end
 end

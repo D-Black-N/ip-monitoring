@@ -1,0 +1,32 @@
+#!/usr/bin/env ruby
+require "daemons"
+require "optparse"
+require File.expand_path("../../config/app", __FILE__)
+
+options = { timeout: 60 }
+
+OptionParser.new do |opts|
+  opts.banner = "Usage: bin/check_daemon [options] {start|stop|restart|status}"
+
+  opts.on("-t", "--timeout SECONDS", Float, "Set check timeout in seconds (default: 60)") do |timeout|
+    options[:timeout] = timeout
+  end
+
+  opts.on("-h", "--help", "Show this help message") do
+    puts opts
+    exit
+  end
+end.parse!
+
+# Проверяем, что передана команда (start, stop, restart, status)
+# unless %w[start stop restart status].include?(ARGV[0])
+#   puts "Error: Please specify a command (start, stop, restart, status)"
+#   puts "Usage: bin/check_daemon [options] {start|stop|restart|status}"
+#   exit(1)
+# end
+
+# Устанавливаем переменную окружения для таймаута
+ENV["PING_TIMEOUT"] = options[:timeout].to_s
+
+# Запускаем демон
+require File.expand_path("../lib/ip_monitoring/check_daemon", __dir__)

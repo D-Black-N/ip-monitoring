@@ -8,6 +8,8 @@ module IpMonitoring
     include Dry::Initializer
 
     config.messages.backend = :i18n
+    config.messages.default_locale = I18n.default_locale
+
     Dry::Validation.load_extensions(:monads)
   end
 end

@@ -7,7 +7,9 @@ RUN apt-get update -qq && \
       wget \
       gnupg \
       lsb-release \
-      ca-certificates
+      ca-certificates \
+      iputils-ping \
+      libcap2-bin
 
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \
     wget -qO - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -

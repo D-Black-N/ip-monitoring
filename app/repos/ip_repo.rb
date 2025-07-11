@@ -21,6 +21,12 @@ module IpMonitoring
         avaliable.exist?(address: address)
       end
 
+      def enabled_in_batches(batch_size: 100)
+        ips.where(enabled: true).each_batch(size: batch_size) do |batch|
+          yield batch.to_a
+        end
+      end
+
       def activate_deleted(address, enabled)
         ip = deleted.where(address: address).one
         return false if ip.nil?

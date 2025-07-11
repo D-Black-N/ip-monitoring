@@ -18,7 +18,13 @@ gem "pg"
 gem "oj"
 
 # Translations
-gem 'hanami-i18n'
+gem 'i18n'
+
+# Daemonization processes
+gem 'daemons'
+
+# PING
+gem 'net-ping'
 
 group :development do
   gem "hanami-webconsole", "~> 2.2"

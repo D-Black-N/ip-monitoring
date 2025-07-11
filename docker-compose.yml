@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  server:
+  server: &app
     build: .
     ports:
       - 2300:2300
@@ -11,6 +11,17 @@ services:
       - .:/app
     depends_on:
       - db
+    tty: true
+    stdin_open: true
+
+  check_daemon:
+    <<: *app
+    cap_add:
+      - NET_RAW
+    ports: []
+    command: bin/check_daemon -t 60 run
+    tty: true
+    stdin_open: true
 
   db:
     image: postgres:16
