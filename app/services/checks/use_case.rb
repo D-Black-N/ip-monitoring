@@ -11,7 +11,7 @@ module IpMonitoring
         
         def call(ip)
           check_params = step send_icmp.call(ip.address.to_s)
-          step create.call(check_params)
+          step create.call(check_params.merge(ip_id: ip.id))
         end
       end
     end

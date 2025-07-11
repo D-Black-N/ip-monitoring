@@ -2,24 +2,25 @@
 
 module IpMonitoring
   module Domain
-    module Checks
+    module Stats
       module Create
         class Contract < IpMonitoring::Contract
           option :repo, default: proc { Hanami.app['repos.ip_repo'] }
 
           params do
             required(:ip_id).value(:integer)
-            required(:failed).value(:bool)
-            required(:rtt_ms).maybe(:integer)
+            optional(:time_from).value(:date_time)
+            optional(:time_to).value(:date_time)
           end
 
           rule(:ip_id) do
             key.failure('must exist') unless repo.exist?(value)
           end
 
-          rule(:rtt_ms) do
-            key.failure('must be nil') if values[:failed] && value
-            key.failure('must be positive') if value && value.negative?
+          rule(:time_from, :time_to) do
+            if values[:time_from] > values[:time_to]
+              key.falure("time_from is greater than time_to: #{values[:time_from]} > #{values[:time_to]}")
+            end
           end
         end
       end

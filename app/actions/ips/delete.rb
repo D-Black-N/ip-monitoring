@@ -11,7 +11,7 @@ module IpMonitoring
         end
 
         def handle(request, response)
-          case operation.call(request.params[:id])
+          case operation.call(request.params.to_h)
           in Success(_)
             response.status = 204
           in Failure[:bad_request, errors]

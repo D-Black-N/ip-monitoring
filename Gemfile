@@ -14,9 +14,6 @@ gem "puma"
 gem "rake"
 gem "pg"
 
-# Fast serialization
-gem "oj"
-
 # Translations
 gem 'i18n'
 
@@ -34,6 +31,7 @@ group :development, :test do
   gem "dotenv"
   gem 'byebug'
   gem 'rom-factory'
+  gem 'rubocop'
 end
 
 group :cli, :development do

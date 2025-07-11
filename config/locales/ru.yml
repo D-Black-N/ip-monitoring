@@ -1,3 +1,10 @@
 ru:
   base:
     not_implemented: Необходимо инициализировать %{name}
+
+  dry_validation:
+    errors:
+      rules:
+        state:
+          included_in?:
+            failure: 'failure'
