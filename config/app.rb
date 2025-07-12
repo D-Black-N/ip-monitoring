@@ -13,6 +13,6 @@ module IpMonitoring
 
     I18n.load_path += Dir["config/locales/*.yml"]
     I18n.available_locales = [:en, :ru]
-    I18n.default_locale = :ru
+    I18n.default_locale = :en
   end
 end
