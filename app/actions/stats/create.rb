@@ -8,9 +8,9 @@ module IpMonitoring
 
         params do
           required(:id).value(:integer)
-          optional(:stats).hash do
-            optional(:time_from).value(:date_time)
-            optional(:time_to).value(:date_time)
+          required(:stats).hash do
+            required(:time_from).value(:date_time)
+            required(:time_to).value(:date_time)
           end
         end
 
