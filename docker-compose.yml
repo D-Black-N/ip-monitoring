@@ -11,17 +11,13 @@ services:
       - .:/app
     depends_on:
       - db
-    tty: true
-    stdin_open: true
 
   check_daemon:
     <<: *app
-    cap_add:
-      - NET_RAW
     ports: []
+    depends_on:
+      - server
     command: bin/check_daemon -t 60 run
-    tty: true
-    stdin_open: true
 
   db:
     image: postgres:16
