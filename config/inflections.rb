@@ -3,5 +3,5 @@
 require 'dry/inflector'
 
 Inflector = Dry::Inflector.new do |inflections|
-  inflections.acronym("ICMP")
+  inflections.acronym('ICMP')
 end

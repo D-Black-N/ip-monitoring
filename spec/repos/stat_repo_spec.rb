@@ -9,7 +9,7 @@ RSpec.describe IpMonitoring::Repos::StatRepo, :db do
     let(:ip) { Factory[:ip] }
 
     before do
-      Factory[:stat, time_from: Time.now - 60 * 120, time_to: Time.now - 60 * 60, ip: ip]
+      Factory[:stat, time_from: Time.now - (60 * 120), time_to: Time.now - (60 * 60), ip: ip]
     end
 
     it 'return stat with selected time range' do
@@ -42,7 +42,14 @@ RSpec.describe IpMonitoring::Repos::StatRepo, :db do
       let(:time_to) { Time.now }
       let(:time_from) { time_to - 60 }
       let(:calculated) do
-        [{ average_rtt_ms: 5.to_d, min_rtt_ms: 1, max_rtt_ms: 8, median_rtt_ms: 6.0, rms_rtt_ms: 3.61.to_d, loss: 25.to_d }]
+        [{
+          average_rtt_ms: 5.to_d,
+          min_rtt_ms: 1,
+          max_rtt_ms: 8,
+          median_rtt_ms: 6.0,
+          rms_rtt_ms: 3.61.to_d,
+          loss: 25.to_d
+        }]
       end
 
       before do

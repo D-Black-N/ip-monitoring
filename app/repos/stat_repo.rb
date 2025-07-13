@@ -7,8 +7,8 @@ module IpMonitoring
         stats.where(ip_id: ip_id, time_from: time_from, time_to: time_to).one
       end
 
-      def calculate(ip_id:, time_from: , time_to:)
-        database = Hanami.app["db.rom"].gateways[:default].connection
+      def calculate(ip_id:, time_from:, time_to:)
+        database = Hanami.app['db.rom'].gateways[:default].connection
 
         query = <<~SQL
           SELECT

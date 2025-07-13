@@ -16,7 +16,7 @@ module IpMonitoring
             ping = Net::Ping::External.new(address, nil, settings.icmp_timeout)
             success = ping.ping?
 
-            { failed: !success, rtt_ms: ping.duration && ping.duration * 1000 }
+            { failed: !success, rtt_ms: ping.duration && (ping.duration * 1000) }
           end
         end
       end

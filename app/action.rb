@@ -1,8 +1,8 @@
 # auto_register: false
 # frozen_string_literal: true
 
-require "hanami/action"
-require "dry/monads"
+require 'hanami/action'
+require 'dry/monads'
 
 module IpMonitoring
   class Action < Hanami::Action

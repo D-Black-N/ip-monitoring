@@ -19,7 +19,7 @@ RSpec.describe IpMonitoring::Domain::Stats::Create::Operation, '#call' do
   let(:time_to) { Time.now }
 
   context 'with success result' do
-    let(:params) { { ip_id: 1, time_from: (time_to - 60).to_s, time_to: time_to.to_s} }
+    let(:params) { { ip_id: 1, time_from: (time_to - 60).to_s, time_to: time_to.to_s } }
 
     context 'when statistic exist' do
       let(:find_statistic) { Factory.structs[:stat, **params].attributes }
@@ -43,7 +43,7 @@ RSpec.describe IpMonitoring::Domain::Stats::Create::Operation, '#call' do
   end
 
   context 'with failure' do
-    let(:params) { { ip_id: 1, time_from: (time_to - 60).to_s, time_to: time_to.to_s} }
+    let(:params) { { ip_id: 1, time_from: (time_to - 60).to_s, time_to: time_to.to_s } }
 
     context 'when validation failed' do
       let(:params) { {} }

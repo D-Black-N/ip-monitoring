@@ -1,0 +1,14 @@
+AllCops:
+    NewCops: enable
+
+Style/Documentation:
+  Enabled: false
+
+Lint/ShadowedException:
+  Enabled: false
+
+Metrics/BlockLength:
+  AllowedMethods: ['describe', 'context', 'run_proc']
+
+Metrics/MethodLength:
+  CountAsOne: ['array', 'hash', 'heredoc']

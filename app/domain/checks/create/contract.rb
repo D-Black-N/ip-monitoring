@@ -19,7 +19,7 @@ module IpMonitoring
 
           rule(:rtt_ms) do
             key.failure('must be nil') if values[:failed] && value
-            key.failure('must be positive') if value && value.negative?
+            key.failure('must be positive') if value&.negative?
           end
         end
       end

@@ -23,7 +23,7 @@ module IpMonitoring
 
           def find_statistic(params)
             Success(stat_repo.find_statistic(**params))
-          rescue => e
+          rescue StandardError => e
             Hanami.logger.error(e.message)
             Failure[:internal_server_error, e.message]
           end
@@ -33,7 +33,7 @@ module IpMonitoring
             return Success(statistic.first) if statistic.any?
 
             Failure[:bad_request, { statistic: 'not found' }]
-          rescue => e
+          rescue StandardError => e
             Hanami.logger.error(e.message)
             Failure[:internal_server_error, e.message]
           end

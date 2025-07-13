@@ -5,7 +5,7 @@ ROM::SQL.migration do
     create_table :checks do
       primary_key :id
 
-      column :rtt_ms, Integer, null: false 
+      column :rtt_ms, Integer, null: false
       column :failed, TrueClass, default: false
       column :loss, Float, null: false, default: 0.0
 

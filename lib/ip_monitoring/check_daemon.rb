@@ -5,7 +5,7 @@ require 'net/ping'
 
 Daemons.run_proc('check_daemon', dir_mode: :normal, dir: 'tmp/pids', log_output: true) do
   Hanami.boot
-  Hanami.logger.info("CheckDaemon started!")
+  Hanami.logger.info('CheckDaemon started!')
 
   repo = Hanami.app['repos.ip_repo']
   use_case = Hanami.app['services.checks.use_case']
@@ -13,7 +13,7 @@ Daemons.run_proc('check_daemon', dir_mode: :normal, dir: 'tmp/pids', log_output:
   thread_pool = Concurrent::FixedThreadPool.new(settings.thread_pool_size)
 
   loop do
-    Hanami.logger.info("Checking IPs...")
+    Hanami.logger.info('Checking IPs...')
 
     repo.enabled_in_batches do |ips|
       ips.each do |ip|

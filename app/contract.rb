@@ -1,7 +1,7 @@
 # auto_register: false
 # frozen_string_literal: true
 
-require "dry-validation"
+require 'dry-validation'
 
 module IpMonitoring
   class Contract < Dry::Validation::Contract

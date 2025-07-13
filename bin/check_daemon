@@ -1,18 +1,20 @@
 #!/usr/bin/env ruby
-require "daemons"
-require "optparse"
-require File.expand_path("../../config/app", __FILE__)
+# frozen_string_literal: true
+
+require 'daemons'
+require 'optparse'
+require File.expand_path('../config/app', __dir__)
 
 options = { timeout: 60 }
 
 OptionParser.new do |opts|
-  opts.banner = "Usage: bin/check_daemon [options] {start|stop|restart|status}"
+  opts.banner = 'Usage: bin/check_daemon [options] {run|start|stop|restart|status}'
 
-  opts.on("-t", "--timeout SECONDS", Float, "Set check timeout in seconds (default: 60)") do |timeout|
+  opts.on('-t', '--timeout SECONDS', Float, 'Set check timeout in seconds (default: 60)') do |timeout|
     options[:timeout] = timeout
   end
 
-  opts.on("-h", "--help", "Show this help message") do
+  opts.on('-h', '--help', 'Show this help message') do
     puts opts
     exit
   end
@@ -26,7 +28,7 @@ end.parse!
 # end
 
 # Устанавливаем переменную окружения для таймаута
-ENV["PING_TIMEOUT"] = options[:timeout].to_s
+ENV['PING_TIMEOUT'] = options[:timeout].to_s
 
 # Запускаем демон
-require File.expand_path("../lib/ip_monitoring/check_daemon", __dir__)
+require File.expand_path('../lib/ip_monitoring/check_daemon', __dir__)

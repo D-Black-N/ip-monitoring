@@ -130,10 +130,10 @@ RSpec.describe IpMonitoring::Repos::IpRepo, :db do
       context 'when enabled not changed' do
         let(:enabled) { false }
 
-      it 'activate IP and return record', :aggregate_failures do
-        expect(result).to be_a IpMonitoring::Structs::Ip
-        expect(result.attributes).to include(deleted: false, enabled: false)
-      end
+        it 'activate IP and return record', :aggregate_failures do
+          expect(result).to be_a IpMonitoring::Structs::Ip
+          expect(result.attributes).to include(deleted: false, enabled: false)
+        end
       end
     end
   end

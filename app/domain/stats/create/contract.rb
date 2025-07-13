@@ -18,9 +18,7 @@ module IpMonitoring
           end
 
           rule(:time_from, :time_to) do
-            if values[:time_from] > values[:time_to]
-              key.failure("time_from is greater than time_to")
-            end
+            key.failure('time_from is greater than time_to') if values[:time_from] > values[:time_to]
           end
         end
       end
