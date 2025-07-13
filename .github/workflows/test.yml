@@ -39,7 +39,7 @@ jobs:
 
       - name: Setup database
         env:
-          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/postgres"
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/monitoring_test"
           HANAMI_ENV: "test"
         run: |
           bundle exec hanami db create
@@ -49,4 +49,7 @@ jobs:
         run: bundle exec rubocop
 
       - name: Run RSpec
+        env:
+          DATABASE_URL: "postgres://postgres:postgres@localhost:5432/monitoring_test"
+          HANAMI_ENV: "test"
         run: bundle exec rspec
