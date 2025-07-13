@@ -2,3 +2,4 @@
 log/*
 persistence/*
 spec/examples.txt
+.env
