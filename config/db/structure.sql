@@ -29,7 +29,7 @@ CREATE TABLE public.checks (
     rtt_ms integer,
     failed boolean DEFAULT false,
     ip_id integer NOT NULL,
-    created_at timestamp without time zone DEFAULT now() NOT NULL,
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
     CONSTRAINT check_rtt_consistency CHECK ((((failed IS TRUE) AND (rtt_ms IS NULL)) OR ((failed IS FALSE) AND (rtt_ms IS NOT NULL))))
 );
 
@@ -57,8 +57,8 @@ CREATE TABLE public.ips (
     address inet NOT NULL,
     enabled boolean DEFAULT true NOT NULL,
     deleted boolean DEFAULT false NOT NULL,
-    created_at timestamp without time zone DEFAULT now() NOT NULL,
-    updated_at timestamp without time zone DEFAULT now() NOT NULL
+    created_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -98,9 +98,9 @@ CREATE TABLE public.stats (
     rms_rtt_ms double precision,
     loss double precision,
     ip_id integer NOT NULL,
-    time_from timestamp without time zone,
-    time_to timestamp without time zone,
-    created_at timestamp without time zone DEFAULT now() NOT NULL
+    time_from timestamp with time zone,
+    time_to timestamp with time zone,
+    created_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
 
@@ -192,4 +192,5 @@ INSERT INTO schema_migrations (filename) VALUES
 ('20250711135409_add_created_at_to_stats.rb'),
 ('20250711145245_drop_events.rb'),
 ('20250712082402_change_stat_colums_types.rb'),
-('20250713115439_add_constraint_failed_rtt_ms_to_checks.rb');
+('20250713115439_add_constraint_failed_rtt_ms_to_checks.rb'),
+('20250713202809_change_time_field_to_timestamptz.rb');

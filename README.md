@@ -112,6 +112,8 @@ git clone git@github.com:D-Black-N/ip-monitoring.git
 cd ip-monitoring
 cp .env.example .env
 docker compose build
+docker compose run --rm server hanami db create
+docker compose run --rm server hanami db migrate
 docker compose up -d
 ```
 Docker контейнеры:
