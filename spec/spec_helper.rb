@@ -3,7 +3,7 @@
 require "pathname"
 SPEC_ROOT = Pathname(__dir__).realpath.freeze
 
-ENV["HANAMI_ENV"] ||= "test"
+ENV["HANAMI_ENV"] = "test"
 require "hanami/prepare"
 require 'net/ping'
 require_relative 'support/factories'

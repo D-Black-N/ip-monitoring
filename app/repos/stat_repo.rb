@@ -4,7 +4,7 @@ module IpMonitoring
   module Repos
     class StatRepo < IpMonitoring::DB::Repo[:stats]
       def find_statistic(ip_id:, time_from:, time_to:)
-        stats.where(ip_id: ip_id, time_from: time_from, time_to: time_to).one!
+        stats.where(ip_id: ip_id, time_from: time_from, time_to: time_to).one
       end
 
       def calculate(ip_id:, time_from: , time_to:)

@@ -1,5 +1,5 @@
 # frozen_string_literal: true
-require 'byebug'
+
 RSpec.describe IpMonitoring::Domain::Stats::Create::Operation, '#call' do
   subject(:operation) { described_class.new(stat_repo: stat_repo, contract: contract).call(params) }
 

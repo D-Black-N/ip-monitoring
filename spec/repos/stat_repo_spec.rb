@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require 'byebug'
 
 RSpec.describe IpMonitoring::Repos::StatRepo, :db do
   subject(:repo) { described_class.new }
@@ -21,7 +20,7 @@ RSpec.describe IpMonitoring::Repos::StatRepo, :db do
       let(:result) { repo.find_statistic(ip_id: 1, time_from: Time.now, time_to: Time.now) }
 
       it 'raised error' do
-        expect { result }.to raise_error(ROM::TupleCountMismatchError)
+        expect(result).to be_nil
       end
     end
   end
@@ -43,14 +42,15 @@ RSpec.describe IpMonitoring::Repos::StatRepo, :db do
       let(:time_to) { Time.now }
       let(:time_from) { time_to - 60 }
       let(:calculated) do
-        [{ average_rtt_ms: 5.to_d, min_rtt_ms: 3, max_rtt_ms: 7, median_rtt_ms: 5.0, rms_rtt_ms: 2.to_d, loss: 33.3.to_d }]
+        [{ average_rtt_ms: 5.to_d, min_rtt_ms: 1, max_rtt_ms: 8, median_rtt_ms: 6.0, rms_rtt_ms: 3.61.to_d, loss: 25.to_d }]
       end
 
       before do
         # Участвуют в формировании статистики
-        Factory[:check, ip: ip, rtt_ms: 3, created_at: time_to - 50]
-        Factory[:check, ip: ip, rtt_ms: 5, created_at: time_to - 49]
-        Factory[:check, ip: ip, rtt_ms: 7, failed: true, created_at: time_to - 48]
+        Factory[:check, ip: ip, rtt_ms: 1, created_at: time_to - 50]
+        Factory[:check, ip: ip, rtt_ms: 6, created_at: time_to - 49]
+        Factory[:check, ip: ip, rtt_ms: 8, created_at: time_to - 48]
+        Factory[:check, ip: ip, rtt_ms: nil, failed: true, created_at: time_to - 47]
 
         # НЕ участвуют в формировании статистики
         Factory[:check, ip: ip, rtt_ms: 9, failed: false, created_at: time_from - 10]

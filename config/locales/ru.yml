@@ -4,6 +4,7 @@ ru:
 
   dry_validation:
     errors:
+      int?: Должно быть числом
       rules:
         state:
           included_in?:
